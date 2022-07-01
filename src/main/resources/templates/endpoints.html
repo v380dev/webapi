@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/css-beautifier_v02.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+    <table class="table table-hover">
+        <dt style="text"th:text ="${field}"></dt>
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Endpoint</th>
+            <th>Request</th>
+            <th>Response</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="endpoint : ${endpoints}">
+            <td th:text="${endpoint.numberLine}"/>
+            <td class="wrp" width=400 th:text="${endpoint.name}"/>
+            <td class="wrp" th:text="${endpoint.requests}"/>
+            <td class="wrp" th:text="${endpoint.responses}"/>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+</html>
