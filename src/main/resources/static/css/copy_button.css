@@ -1,0 +1,25 @@
+.button {
+  padding: 0px 0px;
+  width: 80px;
+  height: 30px;
+  font:  1em "Fira Sans",sans-serif;
+  color: #747673;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: center;
+  cursor: pointer;
+  border: 0px solid  #909090;
+  transition-duration: 0.1s;
+}
+.button_copy {
+  background-color:  #ffffff;
+}
+.button_copy:hover {
+  color: #626461;
+  background-color: #ecfae5;
+}
+.button_copy:active {
+  background-color: #b1c8a3;
+}
