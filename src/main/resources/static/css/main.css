@@ -35,11 +35,11 @@ margin: auto;
 }
 
 .button1 {
-  width: 370px;
+  width: 366px;
   height: 57px;
   background-color:  #c3c5c7;
   color: #181818;
-  border: 0px solid #555555;
+  border: 0px solid #7c7d7e;
 }
 .button1:hover {
   background-color: #bcbec0;
@@ -53,11 +53,16 @@ margin: auto;
 .button2 {
   width: 300px;
   background-color: #fbfbfc;
-  border: 1px solid #d7d7d7;
+  border: 1px solid #7c7d7e;
   text-align: left;
 }
 .button2:hover {
   background-color: #f2f3f5;
+}
+.button2:disabled {
+  color: #d4d4d5;
+  background-color: #f7f7f8;
+  border: 1px solid #d4d4d5;
 }
 
 
