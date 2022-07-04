@@ -28,21 +28,25 @@ public class Controller {
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String showSpreadsheet(
-            @RequestParam(value = "file", required = true) MultipartFile file,
+            @RequestParam(value = "file", required = false) MultipartFile file,
             @RequestParam(value = "field", required = true) String field,
+            @RequestParam(value = "file_from", required = true) String file_from,
             Model model,
             RedirectAttributes redirectAttrs) throws IOException {
-        if (field.isEmpty() || file.isEmpty()) {
-            redirectAttrs.addFlashAttribute("warning", "Заповніть всі поля");
+
+        if (file!=null) {
+            if (!service.checkInputNameFile(file.getOriginalFilename())) {
+                redirectAttrs.addFlashAttribute("warning", "Некоректна назва файлу");
+                return "redirect:/";
+            }
+            service.setFile(file);
+        }
+        if (!service.checkInputNameField(field)) {
+            redirectAttrs.addFlashAttribute("warning", "Некоректна назва поля");
             return "redirect:/";
         }
-        if (!service.checkInputNameField(field) || !service.checkInputNameFile(file.getOriginalFilename())) {
-            redirectAttrs.addFlashAttribute("warning", "Ви ввели некоректні дані");
-            return "redirect:/";
-        }
-        service.setFile(file);
         service.setField(field);
-        model.addAttribute("endpoints", service.getEndpoints());
+        model.addAttribute("endpoints", service.getEndpoints(file_from));
         model.addAttribute("field", field);
         return "endpoints";
     }
