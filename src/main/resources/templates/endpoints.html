@@ -6,14 +6,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="Keywords" content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
+    <meta name="Keywords"
+          content="HTML, Python, CSS, SQL, JavaScript, How to, PHP, Java, C, C++, C#, jQuery, Bootstrap, Colors, W3.CSS, XML, MySQL, Icons, NodeJS, React, Graphics, Angular, R, AI, Git, Data Science, Code Game, Tutorials, Programming, Web Development, Training, Learning, Quiz, Exercises, Courses, Lessons, References, Examples, Learn to code, Source code, Demos, Tips, Website">
     <!--    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>-->
     <!--    <meta charset="utf-8"/>-->
     <link rel="stylesheet" href="css/css-beautifier_v02.css">
     <link rel="stylesheet" href="css/copy_button.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <!--    <script type="text/javascript" th:src="@{/js/copy.js}" />-->
-    <script src="js/copy.js" />
+    <script src="js/copy.js"/>
     <script type="text/javascript" src="example.js"></script>
     <script type="text/javascript">
 function myFunction() {
@@ -30,7 +31,8 @@ function myFunction() {
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
-</script>
+
+    </script>
     <style>
  /* The snackbar - position it at the bottom and in the middle of the screen */
 #snackbar {
@@ -77,21 +79,38 @@ function myFunction() {
   from {bottom: 30px; opacity: 1;}
   to {bottom: 0; opacity: 0;}
 }
-</style>
+
+    </style>
 </head>
 
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-<div  class="container">
-<!--    <button class="button button_copy" onclick="copytable('table_copy_js', 'id_message')">Copy table</button>-->
-<!--    <label id="id_message">...</label>-->
+<div class="container">
+    <!--    <button class="button button_copy" onclick="copytable('table_copy_js', 'id_message')">Copy table</button>-->
+    <!--    <label id="id_message">...</label>-->
     <button class="button button_copy" onclick="myFunction()">Copy table</button>
     <div id="snackbar">Скопійовано.</div>
     <table id="table_copy_js" class="table table-hover">
+
         <thead>
         <tr>
-            <th></th> <th style="text"th:text ="${field}"></th> <th></th> <th></th>
+            <th></th>
+            <th style="text" th:text="${field}"></th>
+            <th style="text">field</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th style="text" th:text="${businessName}"></th>
+            <th style="text">resource</th>
+            <th></th>
+        </tr>
+        <tr>
+            <th></th>
+            <th style="text" th:text="${ref}"></th>
+            <th style="text">url</th>
+            <th></th>
         </tr>
         <tr>
             <th>№</th>

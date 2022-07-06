@@ -4,17 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.web.multipart.MultipartFile;
 import ua.v380dev.model.ModelMain;
 import ua.v380dev.model.entitys.Endpoint;
+import ua.v380dev.model.entitys.Reference;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,10 +24,8 @@ import java.util.List;
 @org.springframework.stereotype.Service
 @PropertySource("classpath:reference_file.properties")
 public class Service {
-    @Value("${file.download.ehals1}")
-    URL eHals1address;
-    @Value("${file.download.ehals2}")
-    URL eHals2address;
+    @Autowired
+    private Environment env;
 
     private MultipartFile file;
     private String field;
@@ -38,20 +36,8 @@ public class Service {
         this.modelMain = modelMain;
     }
 
-    private List<String> getAllLines(MultipartFile file) throws IOException {
-        List<String> listAllLines = new ArrayList<>();
-
-        var is = file.getInputStream();
-        var br = new BufferedReader(new InputStreamReader(is));
-        String line;
-        while ((line = br.readLine()) != null) {
-            listAllLines.add(line);
-        }
-        return listAllLines;
-    }
 
     private List<String> getAllLines(InputStream is) throws IOException {
-//    private List<String> getAllLines(URLClassLoader file) throws IOException {
         List<String> listAllLines = new ArrayList<>();
 
         var br = new BufferedReader(new InputStreamReader(is));
@@ -63,7 +49,7 @@ public class Service {
     }
 
     public List<Endpoint> getEndpoints(String radioButton) throws IOException {
-        var allLines = getAllLines(getReferenceFile(radioButton));
+        var allLines = getAllLines(getInputStream(radioButton));
         var nameObjs = modelMain.getNameObjects(allLines, field);
         return modelMain.findEndpoints(allLines, nameObjs);
     }
@@ -75,14 +61,23 @@ public class Service {
         return modelMain.checkInputFileName(nameFile);
     }
 
-    public InputStream getReferenceFile(String radioButton) throws IOException {
-        return switch (radioButton) {
-            case "eHals1_API" -> eHals1address.openStream();
-            case "eHals2_API" -> eHals2address.openStream();
-            case "local_file" -> file.getInputStream();
-            default -> InputStream.nullInputStream();//відредагувати
-        };
+    public InputStream getInputStream(String radioButton) throws IOException {
+        if(radioButton.equals("local_file")) {
+            return file.getInputStream();
+        }
+        Reference ref = getRef(radioButton);
+        System.out.println("name="+ref.getBusinessName());
+        System.out.println("url="+ref.getUrl());
+        return getRef(radioButton).getInputStream();
     }
 
-
+    public Reference getRef(String radioButton) {
+        return switch (radioButton) {
+            case "ehealth" -> new Reference(env.getProperty("name.ehealth"), env.getProperty("url.ehealth"));
+            case "ehealth_med" -> new Reference(env.getProperty("name.ehealth_med"), env.getProperty("url.ehealth_med"));
+            case "ehealth_mis" -> new Reference(env.getProperty("name.ehealth_mis"), env.getProperty("url.ehealth_mis"));
+            case "ehealth_mis_med" -> new Reference(env.getProperty("name.ehealth_mis_med"), env.getProperty("url.ehealth_mis_med"));
+            default -> null;//відредагувати
+        };
+    }
 }

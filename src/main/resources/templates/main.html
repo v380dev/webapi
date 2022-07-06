@@ -16,13 +16,21 @@
 <form method="post" th:action="@{/upload}" enctype="multipart/form-data">
     &ensp;
     <div>
-        <p class="title">Оберіть істочник файлу:</p>
-        <label class="container" for="eHals1">eHals API<input type="radio" id="eHals1" name="file_from"
-                                                              value="eHals1_API" checked
+        <p class="title">Оберіть джерело файлу:</p>
+        <label class="container" for="ehealth">eHealth API (development)<input type="radio" id="ehealth" name="file_from"
+                                                              value="ehealth" checked
                                                               onclick="setDisabled('file_uploads', true);"><span
                 class="checkmark"></span></label><br>
-        <label class="container" for="eHals2">eHals2 API<input type="radio" id="eHals2" name="file_from"
-                                                               value="eHals2_API"
+        <label class="container" for="ehealth_med">eHealth Medical Events API (development)<input type="radio" id="ehealth_med" name="file_from"
+                                                               value="ehealth_med"
+                                                               onclick="setDisabled('file_uploads', true);"><span
+                class="checkmark"></span></label><br>
+        <label class="container" for="ehealth_mis">eHealth MIS API (ehealth demo, preprod, prod)<input type="radio" id="ehealth_mis" name="file_from"
+                                                               value="ehealth_mis"
+                                                               onclick="setDisabled('file_uploads', true);"><span
+                class="checkmark"></span></label><br>
+        <label class="container" for="ehealth_mis_med">eHealth MIS Medical Events API (ehealth)<input type="radio" id="ehealth_mis_med" name="file_from"
+                                                               value="ehealth_mis_med"
                                                                onclick="setDisabled('file_uploads', true);"><span
                 class="checkmark"></span></label><br>
         <label class="container" for="local">local file<input type="radio" id="local" name="file_from"

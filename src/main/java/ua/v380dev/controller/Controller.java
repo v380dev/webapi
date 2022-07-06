@@ -1,13 +1,16 @@
 package ua.v380dev.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import ua.v380dev.model.entitys.Reference;
 import ua.v380dev.service.Service;
 
 import java.io.IOException;
@@ -32,7 +35,7 @@ public class Controller {
             @RequestParam(value = "field", required = true) String field,
             @RequestParam(value = "file_from", required = true) String file_from,
             Model model,
-            RedirectAttributes redirectAttrs) throws IOException {
+            RedirectAttributes redirectAttrs)/* throws IOException*/ {
 
         if (file!=null) {
             if (!service.checkInputNameFile(file.getOriginalFilename())) {
@@ -46,7 +49,19 @@ public class Controller {
             return "redirect:/";
         }
         service.setField(field);
+        Reference reference = service.getRef(file_from);
+        if(reference==null){
+            model.addAttribute("businessName", file.getOriginalFilename());
+            model.addAttribute("ref", "");
+        } else {
+            model.addAttribute("businessName", reference.getBusinessName());
+            model.addAttribute("ref", reference.getUrl());
+        }
+        try {
         model.addAttribute("endpoints", service.getEndpoints(file_from));
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
         model.addAttribute("field", field);
         return "endpoints";
     }
