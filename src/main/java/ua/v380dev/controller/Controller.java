@@ -14,6 +14,8 @@ import ua.v380dev.model.entitys.Reference;
 import ua.v380dev.service.Service;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @org.springframework.stereotype.Controller
 public class Controller {
@@ -37,7 +39,7 @@ public class Controller {
             Model model,
             RedirectAttributes redirectAttrs)/* throws IOException*/ {
 
-        if (file!=null) {
+        if (file != null) {
             if (!service.checkInputNameFile(file.getOriginalFilename())) {
                 redirectAttrs.addFlashAttribute("warning", "Некоректна назва файлу");
                 return "redirect:/";
@@ -50,19 +52,20 @@ public class Controller {
         }
         service.setField(field);
         Reference reference = service.getRef(file_from);
-        if(reference==null){
-            model.addAttribute("businessName", file.getOriginalFilename());
-            model.addAttribute("ref", "");
+        Map<String, String> inputParameters = new LinkedHashMap();
+        inputParameters.put("field", field);
+        if (reference == null) {
+            inputParameters.put("uploaded file", file.getOriginalFilename());
         } else {
-            model.addAttribute("businessName", reference.getBusinessName());
-            model.addAttribute("ref", reference.getUrl());
+            inputParameters.put("resource", reference.getBusinessName());
+            inputParameters.put("url", reference.getUrl());
         }
         try {
-        model.addAttribute("endpoints", service.getEndpoints(file_from));
+            model.addAttribute("endpoints", service.getEndpoints(file_from));
         } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
-        model.addAttribute("field", field);
+        model.addAttribute("input_parameters", inputParameters);
         return "endpoints";
     }
 }

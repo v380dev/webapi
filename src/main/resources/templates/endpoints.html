@@ -94,22 +94,10 @@ function myFunction() {
     <table id="table_copy_js" class="table table-hover">
 
         <thead>
-        <tr>
+        <tr th:each="str : ${input_parameters}">
             <th></th>
-            <th style="text" th:text="${field}"></th>
-            <th style="text">field</th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th style="text" th:text="${businessName}"></th>
-            <th style="text">resource</th>
-            <th></th>
-        </tr>
-        <tr>
-            <th></th>
-            <th style="text" th:text="${ref}"></th>
-            <th style="text">url</th>
+            <th th:text="${str.value}"/>
+            <th th:text="${str.key}"/>
             <th></th>
         </tr>
         <tr>
