@@ -1,0 +1,20 @@
+#copy_label {
+  font:  1em "Fira Sans",sans-serif;
+  font-size: 14px;
+  visibility: hidden; /* Hidden by default. Visible on click */
+  color: #747673;
+  text-align: left;
+  padding: 14px;
+}
+#copy_label.show {
+  visibility: visible; /* Show the copy_label */
+  animation: fadein 0.1s, fadeout 1.0s 2.0s;
+}
+@keyframes fadein {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+@keyframes fadeout {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
