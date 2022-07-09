@@ -1,5 +1,6 @@
 .img {
+  background-size: 100%;
   background-repeat: no-repeat;
-  background-size: 100% 1000%;
-  background-position: top center;
+  background-position: center 15%;
+  background-color: #040404;
 }
