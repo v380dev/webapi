@@ -68,15 +68,15 @@ margin: auto;
 
  /* The animation code */
 @keyframes example {
-  from {margin: 20px 20px; font-size: 16px; opacity:1;}
-  to {margin: 30px 30px; font-size: 15px; opacity:0;}
+  from {margin: 20px 70px; font-size: 16px; opacity:1;}
+  to {margin: 30px 70px; font-size: 15px; opacity:0;}
 }
 
 /* The element to apply the animation to */
 .anim_disappearing {
   font: 1em "Fira Sans", sans-serif;
   color: #333333;
-  margin: 20px 20px;
+  margin: 20px 70px;
   animation-name: example;
   animation-delay: 1.5s;
   animation-duration: 0.3s;

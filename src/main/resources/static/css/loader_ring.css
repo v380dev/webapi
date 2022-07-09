@@ -1,0 +1,17 @@
+.loader {
+  border: 3px solid #d3d4d5; /* Light grey */
+    border-top: 3px solid #9c9c9e;
+  border-radius: 50%;
+
+  margin: -47px 0px 0px 40px;
+    padding : -10px;
+    width: 30px;
+    height: 30px;
+
+  animation: spin 6s linear infinite;
+  visibility: hidden;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
