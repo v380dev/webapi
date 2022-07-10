@@ -1,0 +1,1 @@
+web: java -jar target/apiari_web-0.1.jar
