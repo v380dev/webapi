@@ -1,6 +1,16 @@
 .img {
-  background-size: 70%;
+  background-size: 40%;
   background-repeat: no-repeat;
-  background-position: center 15%;
+  background-position: center top;
   background-color: #ffffff;
+  opacity: 80%;
+}
+
+.description {
+  text-align: left;
+margin-top: 40%;
+  margin-left: 31%;
+  color: #050505;
+  font-size: 14px;
+  font-family: arial;
 }
