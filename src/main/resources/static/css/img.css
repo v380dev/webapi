@@ -1,16 +1,41 @@
-.img {
-  background-size: 40%;
-  background-repeat: no-repeat;
-  background-position: center top;
+.bac {
   background-color: #ffffff;
-  opacity: 80%;
+  opacity: 90%;
+  margin: 0px;
 }
 
-.description {
-  text-align: left;
-margin-top: 40%;
-  margin-left: 31%;
-  color: #050505;
-  font-size: 14px;
+.container {
+  text-align: center;
+  height: 100%;
+}
+
+.image {
+    height:100vh;
+      animation-name: soft-show;
+      animation-duration: 1s;
+      animation-timing-function: ease-in-out;
+      animation-fill-mode: forwards;
+}
+@keyframes soft-show {
+  from {opacity: 40%;}
+  to {opacity: 100%;}
+}
+
+.top-left {
+  position: absolute;
+  top: 2%;
+  left: 2%;
+  font-size: x-large;
   font-family: arial;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  font-size: large;
+  font-family: arial;
+}
+.bottom-sub {
+  text-align: right;
 }
